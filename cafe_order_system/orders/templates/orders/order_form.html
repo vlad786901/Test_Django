@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="my-4">{{ title }}</h1>
+<form method="post" id="order-form">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.table_number.label_tag }}
+        {{ form.table_number }}
+    </div>
+    <div class="mb-3">
+        {{ form.status.label_tag }}
+        {{ form.status }}
+    </div>
+
+    <h3>Блюда</h3>
+    <div id="dishes">
+        <div class="dish-form mb-3">
+            <input type="text" name="dish_name_0" placeholder="Название блюда" class="form-control">
+            <input type="number" name="dish_price_0" placeholder="Цена" class="form-control" step="0.01">
+        </div>
+    </div>
+
+    <button type="button" id="add-dish" class="btn btn-secondary mb-3">Добавить блюдо</button>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+
+<script>
+    let dishIndex = 1;
+
+    document.getElementById('add-dish').addEventListener('click', function() {
+        const dishesDiv = document.getElementById('dishes');
+        const newDish = document.createElement('div');
+        newDish.classList.add('dish-form', 'mb-3');
+        newDish.innerHTML = `
+            <input type="text" name="dish_name_${dishIndex}" placeholder="Название блюда" class="form-control">
+            <input type="number" name="dish_price_${dishIndex}" placeholder="Цена" class="form-control" step="0.01">
+        `;
+        dishesDiv.appendChild(newDish);
+        dishIndex++;
+    });
+</script>
+{% endblock %}
