@@ -38,7 +38,7 @@ cd cafe_order_system
 ### 2. Установка зависимостей
 Установите необходимые зависимости:
 
-pip install -r requirements.txt
+pip install django
 
 
 ### 3. Настройка базы данных
